@@ -17,7 +17,6 @@ source $WORKON_HOME/tf-daint/bin/activate
 
 # run script
 cd ~/MNIST
-XDG_RUNTIME_DIR="~/run"
 srun -C gpu python deepMNIST.py
 
 # deactivate virtualenv
