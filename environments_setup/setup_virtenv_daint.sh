@@ -16,5 +16,8 @@ source $WORKON_HOME/tf-daint/bin/activate
 # install dependencies
 pip install -r ../requirements.txt
 
+# install aws-cli
+pip install awscli
+
 # deactivate virtualenv
 deactivate

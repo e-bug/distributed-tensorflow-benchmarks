@@ -48,6 +48,9 @@ pip3 install --upgrade https://storage.googleapis.com/tensorflow/linux/gpu/tenso
 # install dependencies
 pip install -r ../requirements.txt
 
+# install aws-cli
+pip install awscli
+
 # deactivate virtualenv
 deactivate
 

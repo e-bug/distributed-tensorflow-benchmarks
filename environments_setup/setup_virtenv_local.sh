@@ -18,5 +18,8 @@ pip3 install --upgrade https://storage.googleapis.com/tensorflow/linux/cpu/tenso
 # install jupyter
 pip3 install --upgrade jupyter
 
+# install aws-cli
+pip install awscli
+
 # deactivate virtualenv
 deactivate
