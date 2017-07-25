@@ -21,7 +21,7 @@ You need to copy `MNIST_data/` as no Internet connection is available at the GPU
 4. Run `sbatch MNIST/deepMNIST_daint.sh`.
 
 ## AWS
-Assume IP_INSTANCE is the IP address of your AWS instance.
+Assume IP_INSTANCE is the IP address of your AWS EC2 instance.
 
 1. Run `rsync deepMNIST.py DeepMNIST.ipynb deepMNIST_aws.sh ubuntu@IP_INSTANCE:MNIST/`.
 2. Log into the instance with `ssh ubuntu@IP_INSTANCE`.
