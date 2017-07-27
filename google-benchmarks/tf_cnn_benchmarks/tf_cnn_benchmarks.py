@@ -629,7 +629,7 @@ def create_config_proto():
   config.allow_soft_placement = True
   config.intra_op_parallelism_threads = FLAGS.num_intra_threads
   config.inter_op_parallelism_threads = FLAGS.num_inter_threads
-#  config.gpu_options.force_gpu_compatible = FLAGS.force_gpu_compatible
+  config.gpu_options.force_gpu_compatible = FLAGS.force_gpu_compatible
   return config
 
 

@@ -1,5 +1,9 @@
+awscli==1.11.126
 bleach==2.0.0
-decorator==4.1.1
+botocore==1.5.89
+colorama==0.3.7
+decorator==4.1.2
+docutils==0.13.1
 entrypoints==0.2.3
 html5lib==0.999999999
 ipykernel==4.6.1
@@ -8,6 +12,7 @@ ipython-genutils==0.2.0
 ipywidgets==6.0.0
 jedi==0.10.2
 Jinja2==2.9.6
+jmespath==0.9.3
 jsonschema==2.6.0
 jupyter==1.0.0
 jupyter-client==5.1.0
@@ -22,13 +27,17 @@ numpy==1.13.1
 pandocfilters==1.4.1
 pexpect==4.2.1
 pickleshare==0.7.4
-prompt-toolkit==1.0.14
+prompt-toolkit==1.0.15
 protobuf==3.3.0
 ptyprocess==0.5.2
+pyasn1==0.3.1
 Pygments==2.2.0
 python-dateutil==2.6.1
+PyYAML==3.12
 pyzmq==16.0.2
 qtconsole==4.3.0
+rsa==3.4.2
+s3transfer==0.1.10
 simplegeneric==0.8.1
 six==1.10.0
 terminado==0.6
@@ -37,4 +46,5 @@ tornado==4.5.1
 traitlets==4.3.2
 wcwidth==0.1.7
 webencodings==0.5.1
+Werkzeug==0.12.2
 widgetsnbextension==2.0.0

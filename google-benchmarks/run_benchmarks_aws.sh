@@ -8,7 +8,7 @@ else
   num_scripts=$1
 fi
 
-# launch scripts serially
+# launch scripts
 for i in `seq 1 $num_scripts`;
 do
   filename='aws_inception3_'`date +%b_%d_%Y_%H_%M_%S`'.log'

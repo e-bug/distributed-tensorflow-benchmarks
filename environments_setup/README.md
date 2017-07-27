@@ -1,7 +1,7 @@
 # Initial setup
 
 Here, you can find the initial setup required to run TensorFlow in the different systems under study.
-The chosen version of TensorFlow is 1.0.0 (same as in Piz Daint).
+The chosen version of TensorFlow is 1.1.0.
 
 
 ## One node
