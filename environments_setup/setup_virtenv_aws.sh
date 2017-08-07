@@ -3,19 +3,19 @@
 # set locale
 export LC_ALL="en_US.UTF-8"
 export LC_CTYPE="en_US.UTF-8"
-sudo dpkg-reconfigure locales
+sudo update-locale LANG=en_US.UTF-8
 
 # NVIDIA requirements to run TensorFlow with GPU support
 ## CUDA Toolkit 8.0
 sudo apt-get update
-sudo apt install gcc
-sudo apt-get install linux-headers-$(uname -r)
+sudo apt install -y gcc
+sudo apt-get install -y linux-headers-$(uname -r)
 wget https://developer.download.nvidia.com/compute/cuda/repos/ubuntu1604/x86_64/cuda-repo-ubuntu1604_8.0.61-1_amd64.deb
 sudo dpkg -i cuda-repo-ubuntu1604_8.0.61-1_amd64.deb
 sudo apt-get update
-sudo apt-get install cuda
+sudo apt-get install -y cuda
 ## Drivers
-sudo add-apt-repository ppa:graphics-drivers/ppa
+sudo add-apt-repository ppa:graphics-drivers/ppa -y
 sudo apt update
 sudo apt-get install nvidia-
 export PATH=/usr/local/cuda-8.0/bin${PATH:+:${PATH}}
@@ -27,14 +27,14 @@ sudo cp cuda/lib64/libcudnn* /usr/local/cuda/lib64
 sudo chmod a+r /usr/local/cuda/include/cudnn.h /usr/local/cuda/lib64/libcudnn*
 
 ## libcupti-dev library
-sudo apt-get install libcupti-dev
+sudo apt-get install -y libcupti-dev
 
 # install packages
-sudo apt install python
-sudo apt install virtualenv
+sudo apt install -y python
+sudo apt install -y virtualenv
 
 # create virtualenv
-export WORKON_HOME=~/Envs
+export WORKON_HOME=$HOME/Envs
 mkdir -p $WORKON_HOME
 cd $WORKON_HOME
 virtualenv -p python3 tf-aws
