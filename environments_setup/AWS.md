@@ -67,6 +67,14 @@ AWS Secret Access Key [None]: bar
 Default region name [None]: us-west-2
 Default output format [None]: json
 ```
+Otherwise, you can create a file called `~/.aws/config` that looks like this:
+```
+[default]
+aws_access_key_id=foo
+aws_secret_access_key=bar
+region=us-west-2
+output=json
+```
 Use your bucket region name for `Default region name`; you can find the code of each region at http://docs.aws.amazon.com/general/latest/gr/rande.html.
 You can leave `Default output format` empty.
 
