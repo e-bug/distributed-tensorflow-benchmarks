@@ -4,7 +4,7 @@
 export WORKON_HOME=~/Envs
 source $WORKON_HOME/tf-local/bin/activate
 
-# run script 
+# run script
 mkdir -p outputs
 python deepMNIST.py > outputs/deepMNIST_local.log
 

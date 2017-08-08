@@ -16,7 +16,7 @@ export WORKON_HOME=~/Envs
 source $WORKON_HOME/tf-daint/bin/activate
 
 # run script
-cd ~/MNIST
+cd $HOME/MNIST
 srun python deepMNIST.py
 
 # deactivate virtualenv
