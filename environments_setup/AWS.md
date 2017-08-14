@@ -103,4 +103,4 @@ After you have configured `aws` on your EC2 instance as described above, you can
 
 1. Run `source Envs/tf-aws/bin/activate`.
 2. Run `aws s3 cp --recursive s3://tfcscs/imagenet ~/imagenet`.
-This creates the `imagenet` directory and copies all the files in it.
+This creates the `~/imagenet` directory and copies all the files in it.
