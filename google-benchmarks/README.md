@@ -3,7 +3,7 @@
 Here you can find the scripts that are used to generate the results shown in the [TensorFlow's benchmarks page](https://www.tensorflow.org/performance/benchmarks).
 In order to create results that are as repeatable as possible, each test is run multiple (5 in our case) times and then the times are averaged together. For each test, 10 warmup steps are done and then the next 100 steps are averaged.
 
-**Differences with the original source code: **
+**Differences with the original source code:**
 commented line 632 in `tf_cnn_benchmarks/tf_cnn_benchmarks.py` to discard the *force_gpu_compatible* option (rising some error on Piz Daint).
 
 
