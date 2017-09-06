@@ -1,0 +1,10 @@
+Distributed TensorFlow: A performance evaluation
+
+
+TensorFlow is Google's open-source software library for Machine Learning.
+Thanks to its portability and flexibility, it has become one of the most popular Deep Learning frameworks, both in industries and in research communities.
+Recently, Google has released TensorFlow's distributed engine with the aim to reduce the long time required to train neural networks.
+
+In this presentation, we firstly give a brief introduction to TensorFlow's programming paradigm.
+Then, we introduce TensorFlow's distributed architecture and see how to easily extend single-machine code to run on an arbitrary number of machines.
+Finally, we show TensorFlow's scalability in training Inception-V3 (a deep neural network) when using GPU-enabled nodes in Piz Daint and in Amazon EC2.
