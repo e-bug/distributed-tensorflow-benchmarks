@@ -10,7 +10,7 @@ commented line 632 in `tf_cnn_benchmarks/tf_cnn_benchmarks.py` to discard the *f
 ## Single process
 
 ### Local
-`./google-benchmarks_local.sh`.
+1. `./google-benchmarks_local.sh`.
 
 ### Piz Daint
 Let USERNAME be your CSCS username.
@@ -34,7 +34,8 @@ This script runs `google-benchmarks_aws.sh` N times (if N is not passed, it defa
 ## Multiple processes (incl. one)
 
 ### Local
-`./google-benchmarks/google-benchmarks_dist_local.sh`.
+1. Modify `run_dist_tf_local.sh` with your desired settings.
+2. Run `./google-benchmarks/google-benchmarks_dist_local.sh` by specifying command-line arguments for the number of PSs, the number of Workers, the type of variable update and whether you want to use real data.
 
 ### Piz Daint
 Let USERNAME be your CSCS username.
