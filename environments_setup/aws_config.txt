@@ -1,5 +1,5 @@
 [default]
-aws_access_key_id=AKIAJBBAROY3BLYU2G5Q
-aws_secret_access_key=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
+aws_access_key_id=AWS_ACCESS_KEY_ID
+aws_secret_access_key=AWS_SECRET_ACCESS_KEY
 region=us-east-2
 output=
