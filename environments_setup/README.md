@@ -27,6 +27,6 @@ Still assume your CSCS username is USERNAME.
 1. Create a file `../aws_public_ips.txt` containing the public IP addresses of all your EC2 instances, one per line.
 2. Run `scp USERNAME@daint.cscs.ch:/apps/daint/UES/6.0.UP02/sandbox-ds/soures/cudnn-8.0-linux-x64-v5.1.tgz .` to retrieve cuDNN from Piz Daint.
 3. Run `remote_setup_aws.sh`. It takes 5 minutes per machine to finish.
-4. (Optional) Run `./check_remote_setup_aws.sh` to check if all your instances have been correctly set up (after waiting around 5 minutes from the previou step).
+4. (Optional) Run `./check_remote_setup_aws.sh` to check if all your instances have been correctly set up (after waiting around 5 minutes from the previous step).
 5. (Optional) If you plan to use S3, run `./remote_aws_configure.sh` in order to configure aws-cli.
 6. (Optional) If you want to copy the ImageNet dataset from S3 to all your instances, run `./remote_copy-dataset_aws.sh`.

@@ -1,9 +1,0 @@
-# Marcel
-[W 15:02:17.035 NotebookApp] 404 GET /nbextensions/widgets/notebook/js/extension.js?v=20170719145430 (148.187.26.66) 3.30ms referer=http://nid05021:8888/notebooks/MNIST/DeepMNIST.ipynb
-[I 15:02:18.527 NotebookApp] Adapting to protocol v5.1 for kernel 854ce1c0-9a9c-4b08-84b8-5f0d9b0fe3cb
-
-# Emanuele
-404 GET /nbextensions/widgets/notebook/js/extension.js?v=20170720102646 (148.187.26.64) 18.27ms referer=http://nid02000:8888/notebooks/MNIST/DeepMNIST.ipynb
-[I 10:36:44.146 NotebookApp] Kernel started: 76dc4e44-4fbd-4efe-832e-56e9546e79c4
-[W 10:36:54.451 NotebookApp] Timeout waiting for kernel_info reply from 76dc4e44-4fbd-4efe-832e-56e9546e79c4
-
