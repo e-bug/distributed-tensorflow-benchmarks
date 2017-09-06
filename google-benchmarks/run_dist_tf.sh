@@ -206,6 +206,6 @@ while [ $running_nodes -lt $num_nodes ]; do
 
 done
 
-rm .tfdist.${SLURM_JOBID}.* # FIXME -- is it not executed?
+rm .tfdist.${SLURM_JOBID}.*
 # rm ps.${SLURM_JOBID}.*
 # rm worker.${SLURM_JOBID}.*

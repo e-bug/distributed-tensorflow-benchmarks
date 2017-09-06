@@ -64,7 +64,7 @@ export TF_NUM_WORKERS=$2 # $SLURM_JOB_NUM_NODES
 # export TF_PS_IN_WORKER=true
 
 # run distributed TensorFlow
-DIST_TF_LAUNCHER_DIR=$HOME/google-benchmarks
+DIST_TF_LAUNCHER_DIR=$SCRATCH/tf
 cd $DIST_TF_LAUNCHER_DIR
 ./run_dist_tf.sh
 

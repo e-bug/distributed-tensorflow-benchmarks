@@ -55,11 +55,11 @@ Make sure that the number of nodes you request in `google-benchmarks_dist_daint.
 10. (Optional) `tmux`.
 11. `./remote_run_aws_scripts.sh`.
 
-You can also run AWS scripts remotely from Daint, provided you copy the private key you use to access EC2 instances into Daint:
+You can also run AWS scripts remotely from Piz Daint, provided you copy the private key you use to access EC2 instances into Piz Daint:
 
 1. `scp ~/.ssh/AWS_PRIVATEKEY USERNAME@daint.cscs.ch:.ssh`.
 2. `ssh USERNAME@daint.cscs.ch mkdir aws aws/outputs aws/code`.
-3. `scp ../aws_p* daint.cscs.ch:aws`.
+3. `scp ../aws_p* USERNAME@daint.cscs.ch:aws`.
 4. `scp remote_google-benchmarks_dist_aws.sh remote_run_aws_scripts.sh remote_run_dist_benchmarks_aws.sh USERNAME@daint.cscs.ch:aws/code`.
 5. `ssh USERNAME@daint.cscs.ch`.
 6. `cd aws/code`.
