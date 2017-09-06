@@ -4,10 +4,13 @@ Here you can find the scripts that are used to generate the results shown in the
 In order to create results that are as repeatable as possible, each test is run multiple (5 in our case) times and then the times are averaged together. For each test, 10 warmup steps are done and then the next 100 steps are averaged.
 
 **Differences with the original source code:**
-commented line 632 in `tf_cnn_benchmarks/tf_cnn_benchmarks.py` to discard the *force_gpu_compatible* option (rising some error on Piz Daint).
+commented line 632 in `tf_cnn_benchmarks/tf_cnn_benchmarks.py` to discard the *force_gpu_compatible* option (rising an error on Piz Daint).
 
 
-## Single node
+## Single process
+
+### Local
+`./google-benchmarks_local.sh`.
 
 ### Piz Daint
 Let USERNAME be your CSCS username.
@@ -28,7 +31,10 @@ If you want to use the ImageNet dataset, make sure you have copied it to your EC
 This script runs `google-benchmarks_aws.sh` N times (if N is not passed, it defaults to 5), one after another, and prints the average number of trained images per second in each of the N executions on the screen.
 
 
-## Multiple nodes (incl. one)
+## Multiple processes (incl. one)
+
+### Local
+`./google-benchmarks/google-benchmarks_dist_local.sh`.
 
 ### Piz Daint
 Let USERNAME be your CSCS username.
@@ -48,7 +54,7 @@ Make sure that the number of nodes you request in `google-benchmarks_dist_daint.
 3. `./remote_setup_aws.sh` (takes ~5 minutes).
 4. (Optional) `./check_remote_setup_aws.sh`.
 5. (If you want to use data in S3) `./remote_aws_configure.sh`.
-6. (If you want to use data in S3) `./remote_copy-dataset_aws.sh` (takes 30/60 minutes).
+6. (If you want to use data in S3) `./remote_copy-dataset_aws.sh`.
 7. `cd ../google-benchmarks`.
 8. `./remote_copy-code_aws.sh`.
 9. Modify `remote_run_aws_scripts.sh` with your desired settings.
