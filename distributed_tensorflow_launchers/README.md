@@ -5,6 +5,8 @@ Here you can find scripts that help you launch distributed TensorFlow applicatio
 For each system, execute the *setup* script to start your application in a distributed mode.
 For Piz Daint, you specify everything in its setup script, while some parameters are present in the *run_dist_tf* files for the other cases.
 
+The distributed MNIST tutorial and the benchmarking scripts make use of these launchers.
+
 ## Local
 - `setup_dist_tf_local.sh`: launches one process per PS/Worker on different terminal windows. Each process calls `run_dist_tf_local.sh` with its job type and index. Arguments: number of Parameter Servers and number of Workers.
 - `run_dist_tf_local.sh`: starts the Python script with the flags herein specified for each process.
