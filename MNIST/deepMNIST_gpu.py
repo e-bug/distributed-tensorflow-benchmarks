@@ -82,15 +82,9 @@ def mnist_inference(images):
       weights = tf.Variable(tf.truncated_normal([5, 5, NUM_CH, HIDDEN1_UNITS], 
                                                 name='weights'))
       biases = tf.Variable(tf.zeros([HIDDEN1_UNITS]), name='biases')
-      conv = tf.nn.relu(tf.nn.conv2d(reshaped_images, weights, 
-                                     strides=[1, 1, 1, 1], padding='SAME', 
-                                     data_format=FLAGS.data_format))
-      conv_shape = conv.get_shape().as_list()
-
-      h_conv1 = tf.reshape(tf.nn.bias_add(conv, biases, 
-                                          data_format=FLAGS.data_format),
-                           [batch_size, conv_shape[1], 
-                            conv_shape[2], conv_shape[3]])
+      h_conv1 = tf.nn.relu(tf.nn.conv2d(reshaped_images, weights, 
+                                        strides=[1, 1, 1, 1], padding='SAME', 
+                                        data_format=FLAGS.data_format) + biases)
 
   # Pooling layer - downsamples by 2X.
   with tf.name_scope('pool1'):
@@ -111,14 +105,9 @@ def mnist_inference(images):
           tf.truncated_normal([5, 5, HIDDEN1_UNITS, HIDDEN2_UNITS], 
                               name='weights'))
       biases = tf.Variable(tf.zeros([HIDDEN2_UNITS]), name='biases')
-      conv = tf.nn.relu(tf.nn.conv2d(h_pool1, weights, 
-                                     strides=[1, 1, 1, 1], padding='SAME', 
-                                     data_format=FLAGS.data_format))
-      conv_shape = conv.get_shape().as_list()
-      h_conv2 = tf.reshape(tf.nn.bias_add(conv, biases,
-                                          data_format=FLAGS.data_format),
-                           [batch_size, conv_shape[1], 
-                            conv_shape[2], conv_shape[3]])
+      h_conv2 = tf.nn.relu(tf.nn.conv2d(h_pool1, weights, 
+                                        strides=[1, 1, 1, 1], padding='SAME', 
+                                        data_format=FLAGS.data_format) + biases)
 
   # Second pooling layer.
   with tf.name_scope('pool2'):
