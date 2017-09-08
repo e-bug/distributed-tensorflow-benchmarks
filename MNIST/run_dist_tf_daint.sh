@@ -208,4 +208,4 @@ done
 
 rm .tfdist.${SLURM_JOBID}.*
 rm ps.${SLURM_JOBID}.*
-rm worker.${SLURM_JOBID}.*
+#rm worker.${SLURM_JOBID}.*
