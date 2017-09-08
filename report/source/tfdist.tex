@@ -1,0 +1,72 @@
+We now describe how to launch a script written to use distributed TensorFlow (see Section \ref{sec:tf-dist-th}) in each of the environments introduced in the previous section.\\
+
+The code for this section can be found in the $\texttt{distributed\_tensorflow\_launchers}$ folder of our repository.
+
+\subsection{Local workstation}
+The setup script for the local workstation runs each task (PS or Worker) on a different terminal window.
+By default, Parameter Servers are launched starting at port $2230$, while Workers at $2220$.
+The script calls, for each task, $\texttt{run\_dist\_tf\_local.sh}$.\\
+
+This script then runs the (distributed TensorFlow) Python script defined herein, with the flags specified in this file as well, for its corresponding task.
+
+\subsection{Piz Daint}
+In the setup script for Piz Daint, we firstly set options for Slurm and load the TensorFlow module.
+Then, we define the (distributed TensorFlow) Python script to be executed and its flags.
+Finally, we set the number of Parameter Servers and Workers.\\
+These values must be consistent with the number of nodes requested for the job.
+In particular, if the Parameter Servers run in a (sub)set of the Worker nodes~\footnote{We assume that the number of Workers is always greater than or equal to the number of PSs.} (default behavior), then the number of Workers must not exceed the number of allocated nodes.
+On the other hand, if the PSs need to run on different nodes than the Workers, then the total number of tasks must not exceed the number of allocated nodes.
+In case the number of allocated nodes is not enough, an error message is returned.\\
+Other settings for a distribute run (commented in the setup script) can be tuned.\\
+%They are commented in the setup script ($\texttt{setup\_dist\_tf\_daint.sh}$).\\
+This script then calls $\texttt{run\_dist\_tf\_daint.sh}$ with the settings declared, which runs the Python script in a distribute environment as described in the next paragraph.\\
+
+$\texttt{run\_dist\_tf\_daint.sh}$ runs the Python script that exported in the setup file.\\
+Firstly, the script checks which configuration parameters have been set by the user in the setup file.
+The only necessary information needed is the name of the Python script.
+The number of Parameter Servers defaults to $1$, while the number of Workers defaults to the number of allocated nodes.
+If not set in the setup file, the script also assumes to run one Worker per node and at one Parameter Server.
+Note that it is not possible to run multiple Workers on a single node in Piz Daint if you use the GPU partition as multiple TensorFlow tasks cannot share the same device.
+As mentioned above, if multiple Parameter Servers are set, the script's default is to run them in a (sub)set of the nodes running a Worker task.
+This is possible because Worker's operations run in the GPU, while Parameter Servers run in the CPU.\\
+The script then retrieves which nodes have been assigned to the job and creates two comma-separated lists: one indicating Parameter Server hosts and one indicating Worker hosts.
+For each node, PSs start at port $2230$, while Workers at port $2220$.\\
+After that, for each node, the script determines how many PSs and Workers are to be run in that node, and creates a Bash script to launch Parameter Server and/or Worker processes.
+When creating these Bash scripts, if a Parameter Server is to be launched, then it is necessary to hide the GPU to avoid that the PS runs on it; which would result in the Worker running on the CPU.\\
+The need of a Bash script is justified by the fact that you can only have a single \texttt{srun} execution per node.
+So, we just run each process in background (appending $\texttt{\&}$ at the end of the command) but the last one.
+
+\subsection{AWS EC2}
+The setup script for Amazon EC2 instances runs remotely; i.e. from a local workstation, for instance.
+It launches one or multiple tasks for each node, according to the number of PSs and Workers entered.
+Parameter Servers always run in nodes running Worker tasks as well.
+The only inputs to the setup script are the IP addresses of the instances, the path of the private key you use to log into them and the number of PSs and Workers.
+In detail, a \texttt{screen} session is started for each task.\\
+Parameter Servers' ports start from $2230$ at each node, while Workers' from $2220$.\\
+It is necessary that private and public IP addresses correspond to the same EC2 instance in the two IP files. 
+That is, the private IP address in line $1$ of the private IP addresses file must be the private address of the instance whose public IP address is in line $1$ in the public IP addresses file.
+Private IP addresses are requested in order to reduce the number of hops between two nodes, achieving higher performance.\\
+
+$\texttt{run\_dist\_tf\_aws.sh}$, instead, has to be copied in each EC2 instance, along with the (distributed TensorFlow) Python script.
+When called from the setup file, this script firstly hides the GPUs from the Python application if the launched task is a Parameter Server (to the Workers to use them) and then runs the application.
+
+\subsection{Case Study: MNIST}
+The \texttt{MNIST} folder of our repository contains an application of the scripts described above for a local workstation and Piz Daint.\\
+
+\texttt{DeepMNIST.ipynb} and \texttt{deepMNIST.py} contain the code of the original deep MNIST tutorial available in TensorFlow's website, which consists of a three-layer neural network (two convolutional layers followed by a fully-connected layer) to classify handwritten digits.\\
+
+We then provide a GPU-enhanced version of this network (\texttt{deepMNIST\_gpu.py}).\\
+As described in TensorFlow's High-Performance Models page, one of the best practices to improve performance and increase flexibility of a model is to add the support for the data format.
+In fact, most TensorFlow operations used by a CNN support both NHWC and NCHW image data formats.
+Image data format refers to the representation of batches of images. 
+TensorFlow supports NHWC (TensorFlow default) and NCHW (cuDNN default). 
+N refers to the number of images in a batch, H refers to the number of pixels in the vertical dimension, W refers to the number of pixels in the horizontal dimension, and C refers to the channels (e.g. 1 for black and white, 3 for RGB, etc.). 
+Although cuDNN can operate on both formats, it is faster to operate in its default format.
+So, NCHW should always be used when training with GPUs, while NHWC is sometimes faster on CPUs.
+By adding data formats to an application, it is then possible to train using NCHW on GPU, and then do inference with NHWC on CPU.\\
+In order to make the existing application support NCHW data format, we introduce some if statements that allow to swap the order of the elements in the \textit{kernel size} and \textit{strides} arrays in the pooling layers.
+Moreover, we also use the optional \texttt{data format} argument of the \texttt{tf.nn.conv2d} function to let the specified image data format being used in convolutions.
+
+Finally, we apply the template shown in Listing \ref{listing:tfdist} to train this GPU-enhanced version of MNIST across multiple nodes in \texttt{dist\_deepMNIST\_gpu.py}.
+Here, only Worker 0 evaluates test accuracy, while each Worker evaluates their train accuracy.
+To launch this application, we used the setup and run\_dist\_tf scripts presented in this section.

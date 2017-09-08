@@ -1,0 +1,32 @@
+In this section, we introduce all the systems which have been used to test and run TensorFlow applications and how to set them up.\\
+The version of TensorFlow that we chose is $1.1.0$ in order to compare our results with other benchmarks available online.\\
+
+The code for this section can be found in the $\texttt{environments\_setup}$ folder of our repository.
+
+\subsection{Local workstation}
+With local workstation we mean a device, such as a laptop, which usually does not have much compute power.
+This can be used to just test whether an application works, even in a distribute setting if it possesses multiple CPUs and/or GPUs.\\
+
+Follow the instructions on the GitHub page to install TensorFlow and create a virtual environment.
+
+\subsection{Piz Daint}
+Piz Daint is a hybrid Cray XC40/XC50 supercomputer at CSCS.
+The system has Aries routing and communications ASIC, with Dragonfly network topology.\\
+At the time of writing, it is the third most powerful supercomputer in the world~\cite{top500} and in the top ten of the most energy-efficient supercomputers~\cite{green500}.\\
+Each node that we use in Piz Daint is equipped with an NVIDIA Tesla P100~\cite{p100}.\\
+
+We use the TensorFlow 1.1.0 module available in Piz Daint whenever we run an application.\\
+The instructions in the GitHub page show how to create a virtual environment containing all the requirements needed to also run Jupyter notebooks (provided a local workstation has already been set up and its \texttt{pip} requirements are available).
+
+\subsection{AWS EC2}
+We also use Amazon EC2 instances~\cite{ec2} to compare the speedup achieved on Piz Daint with the virtual servers available in the cloud of one of the most popular web services.\\
+There are many types of virtual servers, also known as compute instances, to choose from~\cite{ec2instances}.
+For our comparisons, we make use of P2 instances, intended for general-purpose GPU compute applications.
+In particular, we use $p2.xlarge$ (1 GPU per node) and $p2.8xlarge$ (8 GPUs per node) models.\\
+
+\texttt{AWS.md} (in the repository folder) contains additional information on how to create EC2 instances, Amazon S3~\cite{s3} buckets (object storage) and how to transfer data from/to S3.\\
+The instructions in the README file illustrate how to set up each instance to run TensorFlow 1.1.0.
+To do so, NVIDIA cuDNN~\cite{cudnn} is required.
+In our case, we retrieve it from Piz Daint.\\
+The only inputs required for the setup of all the machines are their IP addresses, both public and private ones~\footnote{We need the instances' private IP addresses in order to avoid sending each packet through an additional hop, which would considerably reduce performance.}.
+Hence, you can simply launch compute instances via the AWS management console and copy their IP addresses, one per line, in $\texttt{aws\_public\_ips.txt}$ and $\texttt{aws\_private\_ips.txt}$ under the repository's root directory, without leaving any empty lines.

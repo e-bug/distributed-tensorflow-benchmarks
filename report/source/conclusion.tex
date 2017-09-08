@@ -1,0 +1,19 @@
+Deep neural networks are being used to solve challenges that not long ago were believed to be infeasible to face.
+Deep learning thrives with large neural networks and large datasets, resulting in training times that can be impractical on a single node.\\[-0.4cm]
+
+In this report, we show how to train a model in TensorFlow in a distributed setting and provide benchmarks for InceptionV3 on different systems.\\
+The first outcome is that training on eight nodes in Piz Daint achieves close performance to an NVIDIA DGX-1, an integrated system for deep learning.\\
+Looking at the scalability on Piz Daint for InceptionV3, we expect an average $11\%$ overhead due to I/O access when compared to the corresponding performance with synthetic data.
+Moreover, we expect to detect an inter-node network bottleneck after 64 nodes for this application.\\
+In multi-GPU systems, there is no strong dependence on the interconnect up to 16 8-GPU nodes thanks to the local aggregation performed at each node which reduces the inter-node traffic by the number of GPUs per node.
+Moreover, using local SSDs and eight GPUs per node adds a constant $17\%$ I/O overhead due to the generated PCIe traffic.\\
+Unfortunately, no benchmarks for multiple DGX-1 systems are available at the time of writing, making any direct comparison with Piz Daint impossible.
+However, for this application, we expect that it is possible for 64 nodes in Piz Daint to achieve performance close the one of a 8 DGX-1 systems.\\[-0.4cm]
+
+As part of future work, we plan to profile TensorFlow communication patterns to verify our intuition of inter-node network bottleneck when the number of nodes in a systems becomes large.\\
+A fundamental topic to be investigated is the resulting training accuracy when an application is trained in multiple single- and multi-GPU systems.
+Distributed deep learning is a currentt hot research area. 
+Recently, Facebook showed that they trained, with no loss of accuracy, ImageNet in one hour in Caffe2 using ResNet-50~\cite{fair}, while IBM trains ResNet-50 in fifty minutes~\cite{ibm} in Torch in their software-hardware co-optimized distributed deep learning system.\\
+Another interesting aspect to look into is how the number of Parameter Servers required to achieve the highest performance for a given number of Workers and nodes depends on the underlying inter-node network capacity.
+In fact, both Piz Daint and \textit{p2.xlarge} clusters have single-GPU nodes but when the number of Workers (nodes) becomes large, they require a different number of Parameter Servers to reach their peak performance.
+In particular, \textit{p2.xlarge} cluster end up asking for as many Parameter Servers as Workers (we did not test whether more Parameter Servers than Workers might lead to better performance).

@@ -1,0 +1,18 @@
+In the past few years, deep neural networks have made breakthroughs in a wide variety of everyday technologies, such as speech-recognition on our smartphones, machine translation and in image recognition.
+The success of deep learning is built upon the availability of a vast volume of data and as their sizes grow larger, it can take weeks to train deeper neural networks to the desired accuracy.
+Fortunately, we are not restricted to a single machine and research has been conducted on enabling efficient distributed training of neural networks.\\
+
+There are dozens of open source machine learning libraries that can be used to develop deep learning applications.
+Here, we focus on TensorFlow, Google's open source machine learning framework.
+There are two main reasons why we analyze TensorFlow: first, TensorFlow offers a flexible architecture allows you to deploy computation to one or more CPUs or GPUs in a desktop, server, or mobile device with a single API.
+Second, most CSCS clients use TensorFlow as their deep learning framework.\\
+
+In this report, we analyze the performance of distributed training in TensorFlow (in terms of number of images trained per second) in different systems and compare our results with the benchmarks available in TensorFlow's website.\\
+
+The remainder of this report is organized as follows. 
+We first give a brief overview of TensorFlow, present its architecture in distributed training and explain how to easily extend existing single-machine code to run on multiple nodes.
+We then introduce the systems on which we will run our benchmarks and give some pointers on how to set them up.
+Next, we describe the scripts we have written to easily run TensorFlow in a distributed environment, with a focus on Piz Daint which runs with Slurm Workload Manager.
+A case study on MNIST is presented to show how to extend a single-node TensorFlow application to run across multiple nodes.
+After that, we detail our methodology and discuss the results that we obtain when scaling out to 128 GPUs.
+Finally, we present directions for future work and conclude this report.

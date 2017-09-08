@@ -1,0 +1,145 @@
+\documentclass[12pt]{article}
+\usepackage[english]{babel}
+\usepackage{natbib}
+\usepackage{url}
+\usepackage[utf8x]{inputenc}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\graphicspath{{images/}}
+\usepackage{parskip}
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+\usepackage{vmargin}
+\usepackage{hyperref}
+\usepackage{float}
+
+\usepackage{alltt}
+\usepackage{tcolorbox}
+\newtcolorbox{mybox}{top=1mm, bottom=1mm, left=1mm,right=1mm, boxsep=0mm, width=1\linewidth, breakable, enhanced, opacityframe=0.2, arc=0mm}
+\usepackage{listings}
+\usepackage{pgfkeys}
+\tcbuselibrary{breakable, fitting}
+\tcbuselibrary{skins}
+\tcbset{skin=enhanced}
+
+\usepackage{color}
+\definecolor{mygreen}{rgb}{0,0.6,0}
+\definecolor{mygray}{rgb}{0.5,0.5,0.5}
+\definecolor{mymauve}{rgb}{0.58,0,0.82}
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codeorange}{rgb}{1.0,0.3,0}
+\definecolor{codegray}{rgb}{0.3,0.3,0.3}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.96,0.96,0.96}
+
+\usepackage{listings}
+\usepackage[T1]{fontenc}
+% macro to select a scaled-down version of Bera Mono (for instance)
+\makeatletter
+\newcommand\BeraMonottfamily{%
+  \def\fvm@Scale{0.8}% scales the font down
+  \fontfamily{fvm}\selectfont% selects the Bera Mono font
+}
+\makeatother
+\lstdefinestyle{mystyle}{
+    backgroundcolor=\color{backcolour},   
+    commentstyle=\color{codegray},
+    keywordstyle=\color{codegreen},
+    numberstyle=\tiny\color{codegray},
+    stringstyle=\color{codeorange},
+    basicstyle=\BeraMonottfamily, 
+    breakatwhitespace=false,         
+    breaklines=true,                 
+    captionpos=b,                    
+    keepspaces=true,                 
+    numbers=left,                    
+    numbersep=5pt,                  
+    showspaces=false,                
+    showstringspaces=false,
+    showtabs=false,                  
+    tabsize=2
+}
+\lstset{style=mystyle}
+
+\setmarginsrb{3 cm}{2.5 cm}{3 cm}{2.5 cm}{1 cm}{1.5 cm}{1 cm}{1.5 cm}
+
+\title{Distributed TensorFlow \\[10pt] {\LARGE A performance evaluation}}								% Title
+\author{Emanuele Bugliarello}								% Author
+\date{12 Sept 2015}											% Date
+
+\makeatletter
+\let\thetitle\@title
+\let\theauthor\@author
+\let\thedate\@date
+\makeatother
+
+\pagestyle{fancy}
+\fancyhf{}
+\rhead{Page~\thepage~of~\pageref{LastPage}}
+\lhead{\textit{Distributed TensorFlow: A performance evaluation}}
+% \cfoot{\thepage}
+
+\begin{document}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{titlepage}
+	\centering
+%     \vspace*{-2 cm}
+    \includegraphics[scale = 0.5]{logocscs.png}\hfill\includegraphics[scale = 0.85]{logoethz.png}\\[2.0 cm]	% University Logo
+    
+	\rule{\linewidth}{0.4 mm} \\[0.4 cm]
+	{ \huge \bfseries \thetitle}\\[0.4 cm]
+	\rule{\linewidth}{0.4 mm} \\[0.5 cm]
+    
+    \textsc{\LARGE \theauthor}\\[0.25 cm]
+    {\large\texttt{emanuele.bugliarello@gmail.com}}\\[2.0 cm]	% University Name
+
+	\textsc{\Large Summer Internship Report}\\[0.5 cm]	% University Name
+
+    \textsc{\Large \today}\\[3.0 cm]				% Course Code
+    
+	\begin{flushleft} \large
+		\emph{Supervisors:}\\
+		Marcel Schöngens\\
+        Maxime Martinasso\\
+        Claudio Gheller\\
+    \end{flushleft}
+	
+\end{titlepage}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\tableofcontents
+\pagebreak
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Introduction}
+\input{intro}
+\newpage
+
+\section{TensorFlow}
+\input{tf}
+\newpage
+
+\section{Environments}
+\input{envis}
+\newpage
+
+\section{Distributed TensorFlow}
+\input{tfdist}
+\newpage
+
+\section{Benchmarking Distributed Training}
+\input{benchmarks}
+\newpage
+
+\section{Conclusion and Future Work}
+\input{conclusion}
+\newpage
+
+\bibliographystyle{plain}
+\bibliography{biblist}
+
+\end{document}
